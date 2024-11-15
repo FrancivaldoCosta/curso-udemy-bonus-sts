@@ -19,13 +19,24 @@ public class Programa {
 		EntityManager em = emf.createEntityManager();
 
 /* APAGADO PELO PROFESSOR JUNTAMENTE COM O CODIGO ACIMA
-		//QUANDO O JPA FAZ ALGUMA TRANSAÇÃO QUE NÃO É UMA SIMPLES LEITURA ELE PRECISA DE UMA TRANSAÇÃO;
+		//QUANDO O JPA FAZ ALGUMA TRANSAÇÃO QUE NÃO É UMA SIMPLES LEITURA OU CONSULTA, ELE PRECISA DE UMA TRANSAÇÃO;
 		em.getTransaction().begin(); //INICIA A TRANSAÇÃO;
 		em.persist(p1);
 		em.persist(p2);
 		em.persist(p3);
 		em.getTransaction().commit();//CONFIRMA AS ALTERAÇÕES
-*/		
+*/	
+		
+		//EXEMPLO DE ENTIDADE MONITORADA, PRECISOU DA TRANAÇÃO PRA REMOVER
+		//PRA SER MANIPULADA OU TEM QUE TER ACABADO DE SER INSERIDA OU RECUPERADA DO BANCO DE DADOS
+		Pessoa p = em.find(Pessoa.class, 2);
+		em.getTransaction().begin();
+		em.remove(p);
+		em.getTransaction().commit();
+		
+		
+		
+		
 		System.out.println("Pronto");
 		em.close();
 		emf.close();
