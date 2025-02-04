@@ -11,5 +11,5 @@ import com.francivaldocosta.workshopmongo.domain.Post;
 public interface PostRepository extends MongoRepository<Post, String> {
 	
 	List<Post> findByTitleContainingIgnoreCase(String text);
-
+	
 }
